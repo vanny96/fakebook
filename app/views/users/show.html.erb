@@ -1,1 +1,24 @@
-<h1><%= @user.full_name%><h1>
+<div class="container sidebar">
+
+  <div class="friends">
+    <h2>Friends:</h2>
+    <ul>
+      <%= render @user.friends.page(1).per(5) %>
+    </ul>
+    <%= link_to "Other friends", show_user_friends_path(@user)%>
+  </div>
+
+  <% if current_user == @user %>
+    <div class="pending-requests">
+      <h3>Pending Requests:</h3>
+      <ul>
+        <%= render partial: 'request', collection: @user.friendship_request_received %>
+      </ul>
+    </div>
+  <%end%>
+</div>
+
+<div class="container center">
+  <h1><%= @user.full_name%></h1>
+</div>
+

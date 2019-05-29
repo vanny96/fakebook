@@ -30,6 +30,11 @@ gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
 
+# Pagination
+gem 'kaminari'
+
+gem 'faker'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 

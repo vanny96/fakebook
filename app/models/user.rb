@@ -4,10 +4,20 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: %i[facebook]
-  
+
+
+  # Define associations for friendship
   has_many :friendships
   has_many :friends, through: :friendships
 
+  # Define associations for friendship requests
+  has_many :friendship_request_sent, class_name: 'FriendPendingRequest'
+  has_many :pending_friends, through: :friendship_request_sent
+
+  has_many :friendship_request_received, class_name: 'FriendPendingRequest', foreign_key: 'pending_friend_id'
+  has_many :waiting_friends, through: :friendship_request_received, source: :user
+
+  # Asks the OAuth provider for email, password and full_name
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
@@ -19,6 +29,7 @@ class User < ApplicationRecord
     end
   end
 
+  # Create new user with facebook session
   def self.new_with_session(params, session)
     super.tap do |user|
       if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]

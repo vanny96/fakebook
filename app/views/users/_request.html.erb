@@ -1,0 +1,16 @@
+<li>
+  <%= link_to request.user.full_name, request.user %><br>
+
+  <div class="pending-form-container">
+    <%= form_for(:request, url: friendships_path) do |f| %>
+    <%= f.hidden_field :id, value: request.id %>
+    <%= f.submit "Accept", class: "button"%>
+    <% end %>
+  </div> 
+  - 
+  <div class="pending-form-container">
+    <%= form_for(:request, url: friend_pending_request_path(request), method: :destroy) do |f| %>
+    <%= f.submit "Refuse", class: "button"%>
+    <% end %>
+  </div> 
+</li>
