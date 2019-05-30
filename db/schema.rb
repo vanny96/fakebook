@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_29_194336) do
+ActiveRecord::Schema.define(version: 2019_05_30_123058) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "comments", force: :cascade do |t|
+    t.text "body"
+    t.bigint "user_id"
+    t.string "post_type"
+    t.bigint "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_type", "post_id"], name: "index_comments_on_post_type_and_post_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
 
   create_table "friend_pending_requests", force: :cascade do |t|
     t.integer "user_id"
@@ -31,6 +42,24 @@ ActiveRecord::Schema.define(version: 2019_05_29_194336) do
     t.datetime "updated_at", null: false
     t.index ["friend_id"], name: "index_friendships_on_friend_id"
     t.index ["user_id"], name: "index_friendships_on_user_id"
+  end
+
+  create_table "text_posts", force: :cascade do |t|
+    t.text "body"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_text_posts_on_user_id"
+  end
+
+  create_table "user_likes_posts", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "post_type"
+    t.bigint "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_type", "post_id"], name: "index_user_likes_posts_on_post_type_and_post_id"
+    t.index ["user_id"], name: "index_user_likes_posts_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

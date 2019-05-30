@@ -20,7 +20,14 @@
 
 <div class="container center">
   <h1><%= @user.full_name%></h1>
+
   <%= render partial: 'add_friend', locals: {user: @user}%>
+
+  <% if current_user == @user %>
+    <%= render partial: 'posts/post_form', locals: {post: @post}%>
+  <% end %>
+
+  <%= render partial: 'posts/post', collection: @user.posts %>
 </div>
 <div class="container bottom">
   <div class="remove">

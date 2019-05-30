@@ -40,3 +40,49 @@ button.disabled{
 .remove{
   float: right;
 }
+
+textarea{
+  resize: none;
+  font-size: 20px;
+}
+
+/* Styling published posts */
+
+.post{
+  width: 50%;
+  background-color: lightgray;
+  padding: 5px;
+  margin: 10px auto;
+}
+
+.post-author{
+  float: left;
+}
+
+.post-content{
+  text-align: left;
+}
+
+
+.post-options{
+  text-align: left;
+}
+
+
+.like-option{
+  display: inline-block;
+
+}
+
+.like-button{
+  background:none;
+  color: blue;
+  border:none; 
+  padding:0!important;
+  font: inherit;
+  cursor: pointer;
+}
+
+.like-count{
+  display: inline;
+}

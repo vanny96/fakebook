@@ -5,6 +5,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @post = @user.text_posts.build
   end
 
   def show_friends

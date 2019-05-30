@@ -17,6 +17,15 @@ class User < ApplicationRecord
   has_many :friendship_request_received, class_name: 'FriendPendingRequest', foreign_key: 'pending_friend_id'
   has_many :waiting_friends, through: :friendship_request_received, source: :user
 
+  # Define associations with posts
+  has_many :text_posts
+
+  has_many :user_likes_posts
+  has_many :liked_text_posts, through: :user_likes_posts, source: :post, source_type: 'TextPost'
+
+  # Define associations with comments
+  has_many :comments
+
   # Asks the OAuth provider for email, password and full_name
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
@@ -36,5 +45,11 @@ class User < ApplicationRecord
         user.email = data["email"] if user.email.blank?
       end
     end
+  end
+
+  # Own posts
+
+  def posts
+    (self.text_posts ).order(:created_at)
   end
 end

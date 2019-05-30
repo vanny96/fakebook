@@ -10,4 +10,6 @@ Rails.application.routes.draw do
   resources :friend_pending_requests, only: [:create, :destroy]
   resources :friendships , only: [:create, :destroy]
   resources :friend_pending_requests , only: [:create, :destroy]
+  resources :text_posts, only: [:create, :destroy, :edit, :update]
+  resources :user_like_posts, only: [:create, :destroy]
 end
