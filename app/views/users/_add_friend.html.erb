@@ -1,0 +1,11 @@
+<% if already_invited? user %>
+  <button type="button" class="button disabled" disabled>Already invited</button>
+
+<% elsif invitable? user %>
+
+  <%= form_for(:request, url: friend_pending_requests_path) do |f| %>
+    <%= f.hidden_field :friend_id, value: user.id %>
+    <%= f.hidden_field :url, value: request.original_url %>
+    <%= f.submit "Add friend", class: "button"%>
+  <% end %>
+<% end %>

@@ -9,5 +9,11 @@ class FriendshipsController < ApplicationController
   end
 
   def destroy
+    friendship = Friendship.find(params[:id])
+    name = friendship.friend.full_name
+    if friendship.destroy
+      flash[:notice] = "Friendship ended with #{name}"
+      redirect_to params[:request][:url]
+    end
   end
 end

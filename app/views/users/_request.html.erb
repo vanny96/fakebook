@@ -9,8 +9,8 @@
   </div> 
   - 
   <div class="pending-form-container">
-    <%= form_for(:request, url: friend_pending_request_path(request), method: :destroy) do |f| %>
-    <%= f.submit "Refuse", class: "button"%>
+    <%= form_for(:request, url: friend_pending_request_path(request), method: :delete) do |f| %>
+      <%= f.submit "Refuse", class: "button"%>
     <% end %>
   </div> 
 </li>

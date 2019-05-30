@@ -20,5 +20,11 @@
 
 <div class="container center">
   <h1><%= @user.full_name%></h1>
+  <%= render partial: 'add_friend', locals: {user: @user}%>
+</div>
+<div class="container bottom">
+  <div class="remove">
+    <%= render partial: 'remove_friend', locals: {user: @user}%>
+  </div>
 </div>
 

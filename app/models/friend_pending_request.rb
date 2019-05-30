@@ -3,6 +3,7 @@ class FriendPendingRequest < ApplicationRecord
   belongs_to :pending_friend, class_name: 'User'
 
   validate :already_friend?
+  validates :user, uniqueness: {scope: :pending_friend}
 
   def already_friend?
     if self.user.friends.include?(pending_friend)
@@ -12,10 +13,6 @@ class FriendPendingRequest < ApplicationRecord
 
   def accept_request
     user.friends << pending_friend
-    destroy
-  end
-
-  def refuse_request
     destroy
   end
 end

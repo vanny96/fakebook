@@ -12,7 +12,7 @@ class Friendship < ApplicationRecord
   end
 
   def destroy_inverse_friendship
-    if inverse_friendship = Friendship.where("user_id = ? OR friend_id = ?", self.friend_id, self.user_id).first
+    if inverse_friendship = Friendship.where("user_id = ? AND friend_id = ?", self.friend_id, self.user_id).first
       inverse_friendship.destroy
     end
   end

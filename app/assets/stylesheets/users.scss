@@ -32,3 +32,11 @@
 .button:hover{
   background-color: lightblue;
 }
+
+button.disabled{
+  background-color: lightblue;
+}
+
+.remove{
+  float: right;
+}
