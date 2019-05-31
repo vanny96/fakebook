@@ -1,5 +1,13 @@
 <div class="container sidebar">
   <div class="photo">
+    <% if @user.profile_image.attached? %>
+      <%= image_tag @user.profile_image %>
+    <% elsif @current_user == @user %>
+      <%= form_for(:photo, url: add_photo_path(@user), method: :put) do |f| %>
+        <%= f.file_field :profile_image, accept: 'image/png,image/jpeg' %>
+        <%= f.submit "Add Photo"%>
+      <% end %>
+    <% end %>
   </div>
 
   <div class="friends">

@@ -26,6 +26,9 @@ class User < ApplicationRecord
   # Define associations with comments
   has_many :comments
 
+  # Profile image
+  has_one_attached :profile_image
+
   # Asks the OAuth provider for email, password and full_name
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
