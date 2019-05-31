@@ -4,9 +4,14 @@ Rails.application.routes.draw do
   end
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
-  resources :users, except: [:new, :create, :edit, :update] 
+  resources :users, except: [:new, :create, :edit, :update] do 
+    member do
+      post 'users/:id/profile_pictures', to: 'profile_pictures#create', as: 'add_profile_pictures'
+      patch 'users/:id/profile_pictures', to: 'profile_pictures#update', as: 'update_profile_pictures'
+      delete 'users/:id/profile_pictures', to: 'profile_pictures#destroy', as: 'destroy_profile_pictures'
+    end 
+  end
   get 'users/:id/friends', to: 'users#show_friends', as: 'show_user_friends'
-  put 'users/:id/add_photo', to: 'users#add_photo', as: 'add_photo'
 
   resources :friend_pending_requests, only: [:create, :destroy]
   resources :friendships , only: [:create, :destroy]

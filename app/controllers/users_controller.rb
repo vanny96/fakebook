@@ -20,10 +20,4 @@ class UsersController < ApplicationController
   def show_friends
     @friends = User.find(params[:id]).friends.page(1).per(20)
   end
-
-  def add_photo
-    user = User.find(params[:id])
-    user.profile_image.attach(params[:photo][:profile_image])
-    redirect_to user
-  end
 end
