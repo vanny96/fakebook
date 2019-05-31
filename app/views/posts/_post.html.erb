@@ -1,12 +1,14 @@
 
 <div class="post">
   <% if post.is_a? TextPost %>
+    <div class="post-content-author">
       <div class="post-author">
         <%= link_to post.user.full_name, post.user %> : 
       </div>
       <div class="post-content">
         <%= post.body %>
       </div>
+    </div>
   <%end%>
 
   <div class="post-options">
@@ -16,14 +18,14 @@
     </div>
     <div class="like-option">
       <% unless liked_post? post %>
-      <%= form_for(:like, url: user_like_posts_path) do |f| %>
+        <%= form_for(:like, url: user_like_posts_path) do |f| %>
 
-        <%= f.hidden_field :post_id, value: post.id %>
-        <%= f.hidden_field :post_type, value: post.class %>
-        <%= f.hidden_field :url, value: request.original_url %>
+          <%= f.hidden_field :post_id, value: post.id %>
+          <%= f.hidden_field :post_type, value: post.class %>
+          <%= f.hidden_field :url, value: request.original_url %>
 
-        <%= f.submit "Like", class: 'like-button'%>
-      <%end%>
+          <%= f.submit "Like", class: 'like-button'%>
+        <%end%>
       <% else %>
        
         <% like = current_user.user_likes_posts.find_by(post: post)%>
@@ -34,5 +36,29 @@
 
       <%end%>
     </div>
+    <div class="comment-count">
+      - Comments (<%= post.comments.count%>)
+    </div>
+  </div>
+
+  <div class="comment">
+    <%= form_for(:comment, url: comments_path) do |f| %>
+      <%= f.hidden_field :post_id, value: post.id %>
+      <%= f.hidden_field :post_type, value: post.class %>
+      <%= f.hidden_field :url, value: request.original_url %>
+
+      <%= f.text_area :body, placeholder: 'Leave a comment', class:"comment-form" %>
+      
+      <%= f.submit "Comment", class:'button comment-button'%>
+      
+    <% end %>
+  </div>
+  <div class="comment-section">
+    <% if full_post %>
+      <%= render post.comments.includes(:user) %>
+    <% else %>
+      <%= render post.comments.includes(:user).limit(5) %>
+      <%= link_to "Show all comments", post %>
+    <% end %>
   </div>
 </div>

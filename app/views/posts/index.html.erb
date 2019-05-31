@@ -1,0 +1,9 @@
+<div class="container">
+  <div class="home">
+    <div class="body">
+      <%= render partial: 'posts/post_form', locals: {post: @post}%>
+
+      <%= render partial: 'posts/post', locals: {full_post: false}, collection: @posts %>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,9 @@
 class TextPostsController < ApplicationController
+  def show
+    @post = TextPost.find(params[:id])
+    render 'posts/show'
+  end
+
   def create
     @post = current_user.text_posts.build params_for_post
     unless  @post.save

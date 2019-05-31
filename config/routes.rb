@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_scope :user do
-    root to: "users#index"
+    root to: "posts#index"
   end
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   resources :friend_pending_requests, only: [:create, :destroy]
   resources :friendships , only: [:create, :destroy]
   resources :friend_pending_requests , only: [:create, :destroy]
-  resources :text_posts, only: [:create, :destroy, :edit, :update]
+  resources :posts, only: [:index]
+  resources :text_posts, only: [:show, :create, :destroy, :edit, :update]
   resources :user_like_posts, only: [:create, :destroy]
+  resources :comments, only: [:create, :destroy]
 end

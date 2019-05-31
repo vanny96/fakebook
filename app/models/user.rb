@@ -50,6 +50,10 @@ class User < ApplicationRecord
   # Own posts
 
   def posts
-    (self.text_posts ).order(:created_at)
+    (self.text_posts ).order(created_at: :desc)
+  end
+
+  def feed
+    TextPost.where("user_id IN (?)", self.friend_ids << self.id).includes(:user).order(created_at: :desc)
   end
 end
