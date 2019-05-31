@@ -9,6 +9,15 @@
         <%= post.body %>
       </div>
     </div>
+  <% elsif post.is_a? ImagePost %>
+    <div class="post-content-author">
+      <div class="post-author">
+        <%= link_to post.user.full_name, post.user %> : 
+      </div>
+      <div class="post-content">
+        <%= image_tag post.image %>
+      </div>
+    </div>
   <%end%>
 
   <div class="post-options">

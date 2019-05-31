@@ -58,6 +58,16 @@ textarea{
   box-shadow: 0px 1px 5px gray;
 }
 
+.post-form a{
+  @extend .button;
+  text-decoration: none;
+  font-family: sans;
+}
+
+.post-image{
+  margin-top: 8px;
+}
+
 .post-content-author{
   box-shadow: 0px 1px 5px gray;
   padding: 10px 2px;

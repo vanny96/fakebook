@@ -19,9 +19,11 @@ class User < ApplicationRecord
 
   # Define associations with posts
   has_many :text_posts
+  has_many :image_posts
 
   has_many :user_likes_posts
   has_many :liked_text_posts, through: :user_likes_posts, source: :post, source_type: 'TextPost'
+  has_many :liked_image_posts, through: :user_likes_posts, source: :post, source_type: 'ImagePost'
 
   # Define associations with comments
   has_many :comments
@@ -53,10 +55,12 @@ class User < ApplicationRecord
   # Own posts
 
   def posts
-    (self.text_posts ).order(created_at: :desc)
+    (self.text_posts + self.image_posts).sort_by{|post| post.created_at}.reverse 
   end
 
   def feed
-    TextPost.where("user_id IN (?)", self.friend_ids << self.id).includes(:user).order(created_at: :desc)
+    text_posts = TextPost.where("user_id IN (?)", self.friend_ids << self.id).includes(:user)
+    image_posts = ImagePost.where("user_id IN (?)", self.friend_ids << self.id).includes(:user)
+    (text_posts + image_posts).sort_by{|post| post.created_at}.reverse 
   end
 end

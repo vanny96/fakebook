@@ -1,0 +1,7 @@
+<div class="container center">
+  <%= form_for @post do |f| %>
+    <%= f.file_field :picture, accept: 'image/png,image/jpeg'%><br>
+
+    <%= f.submit "Submit post", class: 'button'%>
+  <% end %>
+</div>
