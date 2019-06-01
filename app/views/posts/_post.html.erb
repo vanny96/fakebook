@@ -1,24 +1,17 @@
 
 <div class="post">
-  <% if post.is_a? TextPost %>
-    <div class="post-content-author">
-      <div class="post-author">
-        <%= link_to post.user.full_name, post.user %> : 
-      </div>
-      <div class="post-content">
-        <%= post.body %>
-      </div>
+  <div class="post-content-author">
+    <div class="post-author">
+      <%= link_to post.user.full_name, post.user %> : 
     </div>
-  <% elsif post.is_a? ImagePost %>
-    <div class="post-content-author">
-      <div class="post-author">
-        <%= link_to post.user.full_name, post.user %> : 
-      </div>
-      <div class="post-content">
+    <div class="post-content">
+      <%= post.body %>
+      <% if post.is_a? ImagePost %>
         <%= image_tag post.image %>
-      </div>
+      <%end%>
     </div>
-  <%end%>
+  </div>
+  
 
   <div class="post-options">
 
@@ -47,6 +40,13 @@
     </div>
     <div class="comment-count">
       - Comments (<%= post.comments.count%>)
+    </div>
+    <div class="remove-post">
+      <% if post.is_a? TextPost %>
+        <%= link_to "Delete post", text_post_path(post), method: :delete%>
+      <% elsif post.is_a? ImagePost %>
+        <%= link_to "Delete post", image_post_path(post), method: :delete %>
+      <% end %>
     </div>
   </div>
 
