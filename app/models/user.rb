@@ -8,7 +8,7 @@ class User < ApplicationRecord
 
 
   # Define associations for friendship
-  has_many :friendships
+  has_many :friendships, dependent: :destroy
   has_many :friends, through: :friendships
 
   # Define associations for friendship requests
@@ -19,15 +19,15 @@ class User < ApplicationRecord
   has_many :waiting_friends, through: :friendship_request_received, source: :user
 
   # Define associations with posts
-  has_many :text_posts
-  has_many :image_posts
+  has_many :text_posts, dependent: :destroy
+  has_many :image_posts, dependent: :destroy
 
-  has_many :user_likes_posts
+  has_many :user_likes_posts, dependent: :destroy
   has_many :liked_text_posts, through: :user_likes_posts, source: :post, source_type: 'TextPost'
   has_many :liked_image_posts, through: :user_likes_posts, source: :post, source_type: 'ImagePost'
 
   # Define associations with comments
-  has_many :comments
+  has_many :comments, dependent: :destroy
 
   # Profile image
   has_one_attached :profile_image

@@ -9,6 +9,9 @@ a:visited{
   width: 15%;
   float: left;
   display: inline;
+  img{
+    width: 100%;
+  }
 }
 
 .center{
@@ -81,6 +84,9 @@ textarea{
 
 .post-content{
   text-align: left;
+  img{
+    width: 100%;
+  }
 }
 
 
@@ -170,3 +176,4 @@ textarea{
 .bottom a:hover{
   background-color: lightcoral;
 }
+
