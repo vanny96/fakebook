@@ -13,6 +13,11 @@ class TextPostsController < ApplicationController
   end
 
   def destroy
+    @post = TextPost.find(params[:id])
+    if @post.destroy
+      flash[:notice] = "Post deleted"
+    end
+    redirect_to @current_user
   end
 
   private

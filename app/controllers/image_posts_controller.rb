@@ -5,14 +5,16 @@ class ImagePostsController < ApplicationController
 
   def show
     @post = ImagePost.find(params[:id])
+    render 'posts/show'
   end
   
   def create
-    @post = @current_user.image_posts.build
-    @post.body = params[:image_post][:body]
+    @post = @current_user.image_posts.build params_for_post
     @post.image.attach params[:image_post][:picture]
 
-    @post.save
+    unless  @post.save
+      flash[:error] = "Couldn't publish your post"
+    end
 
     redirect_to @current_user
   end
@@ -23,5 +25,11 @@ class ImagePostsController < ApplicationController
       flash[:notice] = "Post deleted"
     end
     redirect_to @current_user
+  end
+
+  private
+
+  def params_for_post
+    params.require(:image_post).permit(:body)
   end
 end
