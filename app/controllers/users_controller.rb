@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all.filter{|user| user.active_for_authentication?}
+    @users = Kaminari.paginate_array(@users).page(params[:page]).per(50)
   end
 
   def show
