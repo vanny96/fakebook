@@ -2,12 +2,13 @@
     <% if user.profile_image.attached? %>
       <%= image_tag user.profile_image %>
 
-      <%= form_for(:photo, url: update_profile_pictures_user_path(user), method: :patch) do |f| %>
-        <%= f.file_field :profile_image, accept: 'image/png,image/jpeg' %>
+      <% if current == user%>
+        <%= form_for(:photo, url: update_profile_pictures_user_path(user), method: :patch) do |f| %>
+          <%= f.file_field :profile_image, accept: 'image/png,image/jpeg' %>
         
-        <%= f.submit "Update Photo", class: 'button'%>
-      <% end %>
-
+          <%= f.submit "Update Photo", class: 'button'%>
+        <% end %>
+      <% end%>
     <% elsif current == user %>
       <%= form_for(:photo, url: add_profile_pictures_user_path(user)) do |f| %>
         <%= f.file_field :profile_image, accept: 'image/png,image/jpeg' %>
