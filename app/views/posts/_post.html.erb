@@ -15,39 +15,21 @@
 
   <div class="post-options">
 
-    <div class="like-count">
-      <%= post.user_likes_likeables.count %>
-    </div>
-    <div class="like-option">
-      <% unless liked_post? post %>
-        <%= form_for(:like, url: user_like_likeables_path) do |f| %>
+    <%= render partial: 'user_like_likeables/like', locals: {likeable: post}%>
 
-          <%= f.hidden_field :likeable_id, value: post.id %>
-          <%= f.hidden_field :likeable_type, value: post.class %>
-          <%= f.hidden_field :url, value: request.original_url %>
-
-          <%= f.submit "Like", class: 'like-button'%>
-        <%end%>
-      <% else %>
-       
-        <% like = current_user.user_likes_likeables.find_by(likeable: post)%>
-        <%= form_for(:like, url: user_like_likeable_path(like), method: :delete) do |f| %>
-          <%= f.hidden_field :url, value: request.original_url %>
-          <%= f.submit "Don't like", class: 'like-button'%>
-        <%end%>
-
-      <%end%>
-    </div>
     <div class="comment-count">
       - Comments (<%= post.comments.count%>)
     </div>
-    <div class="remove-post">
-      <% if post.is_a? TextPost %>
-        <%= link_to "Delete post", text_post_path(post), method: :delete%>
-      <% elsif post.is_a? ImagePost %>
-        <%= link_to "Delete post", image_post_path(post), method: :delete %>
-      <% end %>
-    </div>
+
+    <% if @current_user == post.user %>
+      <div class="remove-post">
+        <% if post.is_a? TextPost %>
+          <%= link_to "Delete post", text_post_path(post), method: :delete%>
+        <% elsif post.is_a? ImagePost %>
+          <%= link_to "Delete post", image_post_path(post), method: :delete %>
+        <% end %>
+      </div>
+    <% end %>
   </div>
 
   <div class="comment">

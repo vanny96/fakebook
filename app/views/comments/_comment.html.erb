@@ -5,4 +5,10 @@
   <div class="comment-body">
     <%= comment.body%>
   </div>
+  <div class="comment-option">
+    <%= render partial: 'user_like_likeables/like', locals: {likeable: comment}%>
+    <div class="remove-comment">
+      <%= link_to "Delete comment", comment_path(comment), method: :delete%>
+    </div>
+  </div>
 </div>

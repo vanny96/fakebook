@@ -3,7 +3,7 @@ class FriendPendingRequestsController < ApplicationController
     request = current_user.friendship_request_sent.build(pending_friend_id: params[:request][:friend_id])
     if request.save
       flash[:notice] = "Succesfully invited"
-      redirect_to params[:request][:url]
+      redirect_back fallback_location: posts_path
     end
   end
 

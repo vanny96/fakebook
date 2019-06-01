@@ -9,7 +9,7 @@ class TextPostsController < ApplicationController
     unless  @post.save
       flash[:error] = "Couldn't publish your post"
     end
-    redirect_to params[:text_post][:url] 
+    redirect_back fallback_location: posts_path
   end
 
   def destroy

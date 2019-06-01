@@ -1,0 +1,21 @@
+<div class="like-count">
+      <%= likeable.user_likes_likeables.count %>
+</div>
+<div class="like-option">
+  <% unless liked_already? likeable %>
+    <%= form_for(:like, url: user_like_likeables_path) do |f| %>
+
+      <%= f.hidden_field :likeable_id, value: likeable.id %>
+      <%= f.hidden_field :likeable_type, value: likeable.class %>
+
+      <%= f.submit "Like", class: 'like-button'%>
+    <%end%>
+  <% else %>
+       
+    <% like = @current_user.user_likes_likeables.find_by(likeable: likeable)%>
+    <%= form_for(:like, url: user_like_likeable_path(like), method: :delete) do |f| %>
+      <%= f.submit "Don't like", class: 'like-button'%>
+    <%end%>
+
+  <%end%>
+</div>

@@ -6,6 +6,12 @@ class CommentsController < ApplicationController
   end
 
   def destroy
+    comment = Comment.find(params[:id])
+    post = comment.post
+    if comment.destroy
+      flash[:notice] = "Comment destroied"
+    end
+    redirect_back fallback_location: posts_path
   end
 
   private

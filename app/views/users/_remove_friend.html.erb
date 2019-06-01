@@ -1,7 +1,6 @@
 <% if already_friend? user %>
   <% friendship = current_user.friendships.find_by(friend: user) %>
   <%= form_for(:request, url: friendship_path(friendship), method: :delete) do |f| %>
-    <%= f.hidden_field :url, value: request.original_url %>
     <%= f.submit "Remove friend", class: "button"%>
   <% end %>
 <% end%>

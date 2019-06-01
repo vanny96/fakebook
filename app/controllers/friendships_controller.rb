@@ -13,7 +13,7 @@ class FriendshipsController < ApplicationController
     name = friendship.friend.full_name
     if friendship.destroy
       flash[:notice] = "Friendship ended with #{name}"
-      redirect_to params[:request][:url]
+      redirect_back fallback_location: posts_path
     end
   end
 end
