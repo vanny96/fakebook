@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class UserLikesPostTest < ActiveSupport::TestCase
+class UserLikeLikeablesControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end

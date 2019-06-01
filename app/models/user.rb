@@ -22,9 +22,9 @@ class User < ApplicationRecord
   has_many :text_posts, dependent: :destroy
   has_many :image_posts, dependent: :destroy
 
-  has_many :user_likes_posts, dependent: :destroy
-  has_many :liked_text_posts, through: :user_likes_posts, source: :post, source_type: 'TextPost'
-  has_many :liked_image_posts, through: :user_likes_posts, source: :post, source_type: 'ImagePost'
+  has_many :user_likes_likeables, dependent: :destroy
+  has_many :liked_text_posts, through: :user_likes_likeables, source: :likeable, source_type: 'TextPost'
+  has_many :liked_image_posts, through: :user_likes_likeables, source: :likeable, source_type: 'ImagePost'
 
   # Define associations with comments
   has_many :comments, dependent: :destroy
