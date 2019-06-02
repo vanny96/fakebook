@@ -1,3 +1,21 @@
 // Place all the styles related to the user_like_likeables controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.like-option{
+  display: inline-block;
+
+}
+
+.like-button{
+  background:none;
+  color: blue;
+  border:none; 
+  padding:0!important;
+  font: inherit;
+  cursor: pointer;
+}
+
+.like-count{
+  display: inline;
+}

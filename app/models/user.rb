@@ -60,12 +60,12 @@ class User < ApplicationRecord
   # Own posts
 
   def posts
-    (self.text_posts + self.image_posts).sort_by{|post| post.created_at}.reverse 
+    (self.text_posts + self.image_posts.with_attached_image).sort_by{|post| post.created_at}.reverse 
   end
 
   def feed
     text_posts = TextPost.where("user_id IN (?)", self.friend_ids << self.id).includes(:user)
-    image_posts = ImagePost.where("user_id IN (?)", self.friend_ids << self.id).includes(:user)
+    image_posts = ImagePost.where("user_id IN (?)", self.friend_ids << self.id).includes(:user).with_attached_image
     (text_posts + image_posts).sort_by{|post| post.created_at}.reverse 
   end
 end
