@@ -1,5 +1,5 @@
-<div class="post-form">
-  <%= form_for post do |f| %>
+<div class="post-form" id="post-form">
+  <%= form_for @post, remote: true do |f| %>
     <%= f.hidden_field :url, value: request.original_url %>
 
     <%= f.label :body, "Post:"%><br>
@@ -8,6 +8,6 @@
     <%= f.submit "Publish", class:'button'%>
   <%end%>
   <div class="post-image">
-    <%= link_to "Publish an image", new_image_post_path%>
+    <%= link_to "Publish an image", new_image_post_path, remote: true%>
   </div>
 </div>

@@ -1,11 +1,5 @@
 <div class="container center">
   <div class="post-form">
-    <%= form_for @post do |f| %>
-      <%= f.label :body, "Description:"%><br>
-      <%= f.text_area :body, size: "40x2" %><br>
-      <%= f.file_field :picture, accept: 'image/png,image/jpeg'%><br>
-
-      <%= f.submit "Submit post", class: 'button'%>
-    <% end %>
+    <%= render partial: 'image_post_form.html.erb'%>
   </div>
 </div>

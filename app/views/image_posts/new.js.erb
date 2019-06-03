@@ -1,0 +1,11 @@
+if(typeof selector == 'undefined') {
+  selector = $('#image-form');
+}
+
+if(selector.length){
+  $('#post-form').hide()
+  selector.show()
+}
+else{
+  $('#post-form').hide().after('<%= j render "image_post_form"%>');
+}

@@ -15,8 +15,11 @@ class ImagePostsController < ApplicationController
     unless  @post.save
       flash[:error] = "Couldn't publish your post"
     end
-
-    redirect_to @current_user
+    respond_to do |format|
+      format.html { redirect_back fallback_location: posts_path }
+      format.js
+    end
+    
   end
 
   def destroy
@@ -24,7 +27,7 @@ class ImagePostsController < ApplicationController
     if @post.destroy
       flash[:notice] = "Post deleted"
     end
-    redirect_to @current_user
+    redirect_back fallback_location: root_path
   end
 
   private

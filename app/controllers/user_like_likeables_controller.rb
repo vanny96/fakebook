@@ -2,7 +2,10 @@ class UserLikeLikeablesController < ApplicationController
   def create
     like = current_user.user_likes_likeables.build params_for_like
     like.save 
-    redirect_back fallback_location: posts_path
+    respond_to do |format|
+      format.html { redirect_back fallback_location: posts_path }
+      format.js
+    end
   end
 
   def destroy

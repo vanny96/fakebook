@@ -46,6 +46,17 @@ button.disabled{
   color: white;
 }
 
+.image-form a{
+  @extend .button;
+  font-size: 14px;
+  text-decoration: none;
+  font-family: sans;
+}
+
+.image-form a:visited{
+  color: white;
+}
+
 textarea{
   resize: none;
   font-size: 20px;
