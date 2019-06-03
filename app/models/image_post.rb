@@ -7,4 +7,6 @@ class ImagePost < ApplicationRecord
   has_many :comments, as: :post, dependent: :destroy
 
   has_one_attached :image
+
+  validates :image, presence: true
 end

@@ -17,7 +17,7 @@ class ImagePostsController < ApplicationController
     end
     respond_to do |format|
       format.html { redirect_back fallback_location: posts_path }
-      format.js
+      format.js { render file: 'posts/create'}
     end
     
   end

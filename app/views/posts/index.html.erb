@@ -1,7 +1,9 @@
 <div class="container">
   <div class="home">
     <div class="body">
-      <%= render partial: 'posts/post_form', locals: {post: @post}%>
+      <div id="text-image-form">
+        <%= render partial: 'posts/post_form', locals: {post: @post}%>
+      </div>
 
       <%= render partial: 'posts/post', locals: {full_post: false}, collection: @posts %>
     </div>

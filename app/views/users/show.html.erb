@@ -24,9 +24,11 @@
 
   <%= render partial: 'add_friend', locals: {user: @user}%>
 
-  <% if @current_user == @user %>
-    <%= render partial: 'posts/post_form', locals: {post: @post}%>
-  <% end %>
+  <div id="text-image-form">
+    <% if @current_user == @user %>
+      <%= render partial: 'posts/post_form', locals: {post: @post}%>
+    <% end %>
+  </div>
 
   <%= render partial: 'posts/post', locals: {full_post: false}, collection: @user_posts %>
 </div>
