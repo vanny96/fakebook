@@ -12,3 +12,10 @@ As asked by the ["Final Project"](https://www.theodinproject.com/lessons/final-p
 * Users can comment on their and other posts
 * Users can like posts and comments
 * Users' homepage is filled with their posts and the ones from their friends
+
+Things to improve:
+
+* General design:
+    Going to improve CSS knowledge trough the course in the next weeks.
+* General responsiviness: 
+    Ajax has been implemented on the publishing mechanics, but since I have yet to properly study javascript and jquery I'll delay further implementations until I'll have taken the related course on The Odin Project.
