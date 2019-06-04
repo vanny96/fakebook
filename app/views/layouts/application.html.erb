@@ -13,11 +13,13 @@
     <header>
       <%= render partial: 'layouts/header' %>
     </header>
-    <%if flash.any? %>
-      <% flash.each do |type, message| %>
-        <p class=<%= type %>><%= message %></p>
+    <div class="flash">
+      <%if flash.any? %>
+        <% flash.each do |type, message| %>
+          <p class="flash-<%=type%>"><%= message %></p>
+        <%end%>
       <%end%>
-    <%end%>
+    </div>
     <%= yield %>
   </body>
 </html>
